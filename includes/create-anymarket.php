@@ -151,7 +151,8 @@ if ($order != null && $nid != null) {
                 "items" => $arrayItens
             ]
         );
-        print_r($create_order);
+        //print_r($create_order);
+        echo json_encode("***** SUCESS *****");
     } catch (Exception $e) {
         echo $e->getMessage();
     }
