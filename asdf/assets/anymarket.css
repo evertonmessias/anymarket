@@ -1,0 +1,91 @@
+nav{
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    width: 330px;
+    height: 60px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+nav ul{
+    list-style: none;
+}
+nav ul li{
+    display: inline;
+    margin-right: 15px;     
+}
+img{
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    width: 50%;
+}
+.settings-anymarket, .about-anymarket{
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    width: 99%;
+    min-height: 500px;
+    border: 1px solid #888;
+    margin-top: 15px;
+    margin-left: -5px;
+    padding: 20px;
+}
+.settings-anymarket .title, .about-anymarket .title{
+    color: #f00;
+    
+}
+.settings-anymarket hr, .about-anymarket hr{
+    background-color: #bbb !important;
+    border: 1px solid #bbb !important;
+}
+.settings-anymarket table{
+    width: 65em;
+    border-spacing: 0;
+}
+
+.settings-anymarket .wp-editor-wrap{
+    width: 150%;
+}
+
+.settings-anymarket table img{
+    height: 100%;   
+}
+
+.settings-anymarket input[type=number]{
+    width: 7em;
+    font-weight: 400;
+}
+.settings-anymarket input[type=email],.settings-anymarket input[type=text]{
+    width: 40em;
+    font-weight: 400;
+}
+.settings-anymarket textarea{
+    width: 100%;
+    font-weight: 400;
+    margin-bottom: -3px;
+}
+
+.settings-anymarket table td:nth-child(1),.settings-anymarket table td:nth-child(3){
+    width: 4em;
+}
+
+.settings-anymarket table td:nth-child(1) div{
+    text-align: center !important;
+    font-weight: 600;
+}
+.settings-anymarket table td:nth-child(2){
+    width: 40em;   
+}
+.settings-anymarket table td:nth-child(2) input{
+    width: 100%;
+}
+
+#heateor_sss_meta{
+    display: none;
+}
+
+.meta-box-sortables input.postmeta-projetos,.meta-box-sortables input.postmeta-post{
+    width: 100%;
+}
