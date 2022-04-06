@@ -76,20 +76,33 @@ function style_and_script()
 add_action('admin_enqueue_scripts', 'style_and_script');
 
 
-// ***************** Add Menu Anymarket + Page About
+// ***************** Page About
 function menu_anymarket()
 {
     add_menu_page('Anymarket', 'Anymarket', 'edit_posts', 'anymarket', 'function_about', 'dashicons-screenoptions', 1);
 }
 add_action('admin_menu', 'menu_anymarket');
 
-
-// ***************** Page About
 function function_about()
 {
     include ABSPATH . '/wp-content/plugins/anymarket/includes/about.php';
 }
 add_action('function_about', 'function_about');
 
+
 // ***************** Include Settings
 include ABSPATH . '/wp-content/plugins/anymarket/includes/settings.php';
+
+
+// ***************** Page products
+function products_anymarket()
+{
+    add_submenu_page('anymarket', 'Products', 'Products', 'edit_posts', 'products', 'function_products', 2);
+}
+add_action('admin_menu', 'products_anymarket');
+
+function function_products()
+{
+    include ABSPATH . '/wp-content/plugins/anymarket/includes/products-anymarket.php';
+}
+add_action('function_products', 'function_products');

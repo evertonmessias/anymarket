@@ -5,6 +5,8 @@ Warning: Create file 'page-anymarket.php' in theme directory and add code:
 <?php echo do_shortcode("[scanymarket]"); ?>
 */
 
+include 'Anymarket.php';
+
 if (isset($_GET['nid'])) {
     $nid = $_GET['nid'];
 } else {
@@ -13,36 +15,7 @@ if (isset($_GET['nid'])) {
 
 $order = wc_get_order($nid);
 
-if ($order != null && $nid != null) {
-
-    class AMOrder
-    {
-        public static function create(array $params)
-        {
-            $config_url = get_option('anymarket_input_0');
-            $config_token = get_option('anymarket_input_1');
-            $params_json = json_encode($params);
-            $curl = curl_init();
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => $config_url,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => $params_json,
-                CURLOPT_HTTPHEADER => array(
-                    'gumgaToken: ' . $config_token . '',
-                    'Content-Type: application/json'
-                ),
-            ));
-            $response = curl_exec($curl);
-            curl_close($curl);
-            return $response;
-        }
-    }
+if ($order != null && $nid != null) {    
 
     $marketPlaceId = $order->get_id();
     $marketPlaceNumber = $order->get_id();
@@ -89,7 +62,6 @@ if ($order != null && $nid != null) {
     $payments_value = $order->get_total();
     $item_count = $order->get_item_count();
     $array_item = array();
-    $array_sku = array();
     foreach ($order->get_items() as $item_data) {
         $array_item[] = $item_data;
     }
@@ -126,7 +98,7 @@ if ($order != null && $nid != null) {
     }
 
     try {
-        $create_order = AMOrder::create(
+        $create_order = Anymarket::create(
             [
                 "marketPlaceId" => "1000$marketPlaceId",
                 "marketPlaceNumber" => "1000$marketPlaceId",
