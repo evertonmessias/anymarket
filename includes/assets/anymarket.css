@@ -21,7 +21,7 @@ img{
     margin: 0 auto;
     width: 50%;
 }
-.settings-anymarket, .about-anymarket{
+.settings-anymarket, .about-anymarket, .product-anymarket{
     display: block;
     position: relative;
     margin: 0 auto;
@@ -32,11 +32,11 @@ img{
     margin-left: -5px;
     padding: 20px;
 }
-.settings-anymarket .title, .about-anymarket .title{
+.settings-anymarket .title, .about-anymarket .title, .product-anymarket .title{
     color: #f00;
     
 }
-.settings-anymarket hr, .about-anymarket hr{
+.settings-anymarket hr, .about-anymarket hr, .product-anymarket hr{
     background-color: #bbb !important;
     border: 1px solid #bbb !important;
 }
