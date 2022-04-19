@@ -51,7 +51,6 @@ function add_page_anymarket()
 }
 register_activation_hook(__FILE__, 'add_page_anymarket');
 
-
 function remove_page_anymarket()
 {
     $page_anymarket = new WP_Query(array('pagename' => 'anymarket'));
@@ -76,7 +75,6 @@ function add_page_amcallback()
 }
 register_activation_hook(__FILE__, 'add_page_amcallback');
 
-
 function remove_page_amcallback()
 {
     $page_amcallback = new WP_Query(array('pagename' => 'amcallback'));
@@ -88,18 +86,19 @@ function remove_page_amcallback()
 }
 register_deactivation_hook(__FILE__, 'remove_page_amcallback');
 
+
 // ***************** Add DB anymarket
 function add_db_anymarket()
 {
-    global $wpdb;   
+    global $wpdb;
     $charset_collate = $wpdb->get_charset_collate();
     $table_name = $wpdb->prefix . 'anymarket';
     $sql = "CREATE TABLE $table_name (`id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,`content` text NOT NULL,`time` datetime DEFAULT '0000-00-00 00:00:00' NOT NULL)$charset_collate;";
 
     if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
-    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-    dbDelta($sql);
-  }
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+        dbDelta($sql);
+    }
 }
 register_activation_hook(__FILE__, 'add_db_anymarket');
 

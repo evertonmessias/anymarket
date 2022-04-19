@@ -1,5 +1,6 @@
 <h2>AMCALLBACK</h2>
 <?php
-$content = json_encode($_GET);
+if(!empty($_GET)){
 include 'Anymarket.php';
-Anymarket::registerdb($content);
+Anymarket::registerdb(json_encode($_GET));
+}
