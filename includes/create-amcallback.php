@@ -1,5 +1,5 @@
+<h2>AMCALLBACK</h2>
 <?php
-$json = file_get_contents('php://input');
-$data = json_decode($json);
-echo $data;
-echo "<script>console.log(".$data.")</script>";
+$content = json_encode($_POST);
+include 'Anymarket.php';
+Anymarket::registerdb($content);

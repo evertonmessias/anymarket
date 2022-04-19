@@ -152,7 +152,8 @@ if ($order != null && $nid != null) {
             ]
         );
         //print_r($create_order);
-        echo json_encode("***** SUCESS *****");
+        Anymarket::registerdb($create_order);
+        echo json_encode($create_order);
     } catch (Exception $e) {
         echo $e->getMessage();
     }

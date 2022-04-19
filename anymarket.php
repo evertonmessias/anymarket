@@ -88,6 +88,21 @@ function remove_page_amcallback()
 }
 register_deactivation_hook(__FILE__, 'remove_page_amcallback');
 
+// ***************** Add DB anymarket
+function add_db_anymarket()
+{
+    global $wpdb;   
+    $charset_collate = $wpdb->get_charset_collate();
+    $table_name = $wpdb->prefix . 'anymarket';
+    $sql = "CREATE TABLE $table_name (`id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,`content` text NOT NULL,`time` datetime DEFAULT '0000-00-00 00:00:00' NOT NULL)$charset_collate;";
+
+    if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    dbDelta($sql);
+  }
+}
+register_activation_hook(__FILE__, 'add_db_anymarket');
+
 
 // ***************** Add style & script for Admin
 function style_and_script()
@@ -137,3 +152,17 @@ function function_products()
     include ABSPATH . '/wp-content/plugins/anymarket/includes/products-anymarket.php';
 }
 add_action('function_products', 'function_products');
+
+
+// ***************** Page response
+function response_anymarket()
+{
+    add_submenu_page('anymarket', 'Response', 'Response', 'edit_posts', 'response', 'function_response', 3);
+}
+add_action('admin_menu', 'response_anymarket');
+
+function function_response()
+{
+    include ABSPATH . '/wp-content/plugins/anymarket/includes/response-anymarket.php';
+}
+add_action('function_response', 'function_response');

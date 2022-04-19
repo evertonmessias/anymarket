@@ -50,4 +50,20 @@ class Anymarket
         curl_close($curl);
         return $response;
     }
+
+    public static function registerdb($data){
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'anymarket';        
+        $wpdb->insert($table_name,array('content' => $data,'time' => current_time('mysql')));
+    }
+
+    public static function response()
+    {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'anymarket';
+        $results = $wpdb->get_results(
+            "SELECT * FROM $table_name"
+        );
+        return $results;
+    }
 }
