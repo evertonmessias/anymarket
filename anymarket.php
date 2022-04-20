@@ -42,7 +42,7 @@ function add_page_anymarket()
 {
     $page_anymarket = array(
         'post_title'    => wp_strip_all_tags('anymarket'),
-        'post_content'  => "",
+        'post_content'  => "[scanymarket]",
         'post_status'   => 'publish',
         'post_author'   => 1,
         'post_type'     => 'page'
@@ -66,7 +66,7 @@ function add_page_amcallback()
 {
     $page_amcallback = array(
         'post_title'    => wp_strip_all_tags('amcallback'),
-        'post_content'  => "",
+        'post_content'  => "[amcallback]",
         'post_status'   => 'publish',
         'post_author'   => 1,
         'post_type'     => 'page'
@@ -85,6 +85,7 @@ function remove_page_amcallback()
     wp_delete_post($id, true);
 }
 register_deactivation_hook(__FILE__, 'remove_page_amcallback');
+
 
 
 // ***************** Add DB anymarket
