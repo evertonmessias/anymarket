@@ -37,21 +37,31 @@ function amcallback()
 add_shortcode('amcallback', 'amcallback');
 
 
-// ***************** Add/Delete Page on Theme
-function add_page_anymarket()
+// ***************** Add/Delete Pages on Theme
+function add_pages()
 {
     $page_anymarket = array(
-        'post_title'    => wp_strip_all_tags('anymarket'),
+        'post_title'    => 'anymarket',
         'post_content'  => "[scanymarket]",
         'post_status'   => 'publish',
         'post_author'   => 1,
         'post_type'     => 'page'
     );
     wp_insert_post($page_anymarket);
-}
-register_activation_hook(__FILE__, 'add_page_anymarket');
 
-function remove_page_anymarket()
+    $page_amcallback = array(
+        'post_title'    => 'amcallback',
+        'post_content'  => "[amcallback]",
+        'post_status'   => 'publish',
+        'post_author'   => 1,
+        'post_type'     => 'page'
+    );
+    wp_insert_post($page_amcallback);
+
+}
+register_activation_hook(__FILE__, 'add_pages');
+
+function remove_pages()
 {
     $page_anymarket = new WP_Query(array('pagename' => 'anymarket'));
     while ($page_anymarket->have_posts()) {
@@ -59,33 +69,16 @@ function remove_page_anymarket()
         $id = get_the_ID();
     }
     wp_delete_post($id, true);
-}
-register_deactivation_hook(__FILE__, 'remove_page_anymarket');
 
-function add_page_amcallback()
-{
-    $page_amcallback = array(
-        'post_title'    => wp_strip_all_tags('amcallback'),
-        'post_content'  => "[amcallback]",
-        'post_status'   => 'publish',
-        'post_author'   => 1,
-        'post_type'     => 'page'
-    );
-    wp_insert_post($page_amcallback);
-}
-register_activation_hook(__FILE__, 'add_page_amcallback');
-
-function remove_page_amcallback()
-{
     $page_amcallback = new WP_Query(array('pagename' => 'amcallback'));
     while ($page_amcallback->have_posts()) {
         $page_amcallback->the_post();
         $id = get_the_ID();
     }
     wp_delete_post($id, true);
-}
-register_deactivation_hook(__FILE__, 'remove_page_amcallback');
 
+}
+register_deactivation_hook(__FILE__, 'remove_pages');
 
 
 // ***************** Add DB anymarket
