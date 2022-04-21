@@ -19,21 +19,9 @@ function anymarket_page_html()
 			</label>
 
 			<br><br><!-- *************************************** -->
-			<hr>
+			<hr><br>
 			<?php submit_button(); ?>
-		</form>
-		<h3>Warning: Create files:<br><br>
-			<ul>
-				<li>
-					<i>'page-anymarket.php'</i> in theme directory and add code:<br>
-					<code>echo do_shortcode("[scanymarket]");</code>
-				</li><br>
-				<li>
-					<i>'page-amcallback.php'</i> in theme directory and add code:<br>
-					<code>echo do_shortcode("[amcallback]");</code>
-				</li>
-			</ul>
-		</h3>
+		</form>		
 	</div>
 <?php
 }

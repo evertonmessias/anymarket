@@ -23,26 +23,12 @@ function header_scripts()
 add_action('wp_head', 'header_scripts');
 
 
-// ***************** Add Shortcode
-function scanymarket()
-{
-    include ABSPATH . '/wp-content/plugins/anymarket/includes/create-anymarket.php';
-}
-add_shortcode('scanymarket', 'scanymarket');
-
-function amcallback()
-{
-    include ABSPATH . '/wp-content/plugins/anymarket/includes/create-amcallback.php';
-}
-add_shortcode('amcallback', 'amcallback');
-
-
 // ***************** Add/Delete Pages on Theme
 function add_pages()
 {
     $page_anymarket = array(
         'post_title'    => 'anymarket',
-        'post_content'  => "[scanymarket]",
+        'post_content'  => '',
         'post_status'   => 'publish',
         'post_author'   => 1,
         'post_type'     => 'page'
@@ -51,7 +37,7 @@ function add_pages()
 
     $page_amcallback = array(
         'post_title'    => 'amcallback',
-        'post_content'  => "[amcallback]",
+        'post_content'  => '',
         'post_status'   => 'publish',
         'post_author'   => 1,
         'post_type'     => 'page'
@@ -79,6 +65,26 @@ function remove_pages()
 
 }
 register_deactivation_hook(__FILE__, 'remove_pages');
+
+
+// ***************** Alter Template
+function amcallbacktemplate( $amcallbacktemplate )
+{
+    if ( is_page( 'amcallback' ) ) {
+        $amcallbacktemplate = ABSPATH . '/wp-content/plugins/anymarket/includes/create-amcallback.php';
+    }
+    return $amcallbacktemplate;
+}
+add_filter( 'page_template', 'amcallbacktemplate' );
+
+function anymarkettemplate( $anymarkettemplate )
+{
+    if ( is_page( 'anymarket' ) ) {
+        $anymarkettemplate = ABSPATH . '/wp-content/plugins/anymarket/includes/create-anymarket.php';
+    }
+    return $anymarkettemplate;
+}
+add_filter( 'page_template', 'anymarkettemplate' );
 
 
 // ***************** Add DB anymarket

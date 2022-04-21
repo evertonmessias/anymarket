@@ -1,12 +1,4 @@
-<h2>ANYMARKET Register</h2>
-
 <?php
-
-/*
-Warning: Create file 'page-anymarket.php' in theme directory and add code:
-<?php echo do_shortcode("[scanymarket]"); ?>
-*/
-
 if (isset($_GET['nid'])) {
 
     include 'Anymarket.php';
@@ -150,9 +142,7 @@ if (isset($_GET['nid'])) {
                     "items" => $arrayItens
                 ]
             );
-            //print_r($create_order);
-            Anymarket::registerdb($create_order);
-            echo json_encode($create_order);
+            echo json_encode(Anymarket::registerdb($create_order));            
         } catch (Exception $e) {
             echo $e->getMessage();
         }

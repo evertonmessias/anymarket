@@ -9,7 +9,7 @@ window.onload = ()=>{
         console.log("PAGAMENTO: "+nid);
         fetch(`/anymarket/?nid=${nid}`)
         .then((response) => response.json())
-        .then((data) => console.log("MENSAGEM: "+JSON.stringify(data, null)))
+        .then((data) => console.log(data))
         .catch((error) => console.error(error))
     }
 }

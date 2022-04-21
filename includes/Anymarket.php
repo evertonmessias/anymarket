@@ -51,10 +51,16 @@ class Anymarket
         return $response;
     }
 
-    public static function registerdb($data){
+    public static function registerdb($data)
+    {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'anymarket';        
-        $wpdb->insert($table_name,array('content' => $data,'time' => current_time('mysql')));
+        $table_name = $wpdb->prefix . 'anymarket';
+        $resp = $wpdb->insert($table_name, array('content' => $data, 'time' => current_time('mysql')));
+        if ($resp == 1) {
+            return "register db: SUCESS";
+        } else {
+            return "register db: ERROR";
+        }
     }
 
     public static function response()
