@@ -103,7 +103,7 @@ if (isset($_GET['nid'])) {
                     "freight" => "$freight",
                     "interestValue" => "$interestValue",
                     "gross" => "$gross",
-                    "total" => "$total",
+                    "total" => "$item_count",
                     "shipping" => [
                         "city" => "$shipping_city",
                         "state" => "$shipping_state",
