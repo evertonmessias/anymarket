@@ -68,7 +68,7 @@ if (isset($_GET['nid'])) {
             $items_sku_partnerId[$x] = wc_get_product($array_item[$x]['product_id'])->get_sku();
             $items_amount[$x] = $array_item[$x]['total'];
             $items_unit[$x] = $array_item[$x]['quantity'];
-            $items_gross[$x] = $array_item[$x]['total'];
+            $items_gross[$x] = $array_item[$x]['quantity'];
             $items_total[$x] = $array_item[$x]['total'];
             $items_discount[$x] = $array_item[$x]['total_tax'];
         }
@@ -97,7 +97,7 @@ if (isset($_GET['nid'])) {
                     "createdAt" =>  "$createdAt",
                     "paymentDate" => "$paymentDate",
                     "transmissionStatus" => "$transmissionStatus",
-                    "status" => "PAID_WAITING_SHIP",
+                    "status" => "$status",
                     "marketPlaceStatus" => "$marketPlaceStatus",
                     "discount" => "$discount",
                     "freight" => "$freight",

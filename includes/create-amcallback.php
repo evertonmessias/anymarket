@@ -19,7 +19,9 @@ if (!empty($_POST) || !empty($_GET)) {
 
         $tab_status = array(
             'PAID_WAITING_SHIP' => 'pending',
-            'CANCELED' => 'cancelled'
+            'CANCELED' => 'cancelled',
+            'CONCLUDED' => 'completed',
+            'INVOICED' => 'completed'
         );
 
         $order = wc_get_order($id);
