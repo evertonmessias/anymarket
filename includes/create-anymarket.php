@@ -6,6 +6,13 @@ if (isset($_GET['nid'])) {
     $nid = $_GET['nid'];
     $order = wc_get_order($nid);
 
+    $tab_status = array(
+        'pending' => 'PAID_WAITING_SHIP',
+        'cancelled' => 'CANCELED',
+        'completed' => 'CONCLUDED',
+        'completed' => 'INVOICED'
+    );
+
     if ($order != null && $nid != null) {
 
         $marketPlaceId = $order->get_id();
@@ -14,7 +21,7 @@ if (isset($_GET['nid'])) {
         $createdAt = $order->get_date_created();
         $paymentDate = $order->get_date_paid();
         $transmissionStatus = "OK";
-        $status = $order->get_status();
+        $status = $tab_status[$order->get_status()];
         $marketPlaceStatus = $order->get_status();
         $discount = $order->get_discount_total();
         $freight = 0;
@@ -56,17 +63,18 @@ if (isset($_GET['nid'])) {
         foreach ($order->get_items() as $item_data) {
             $array_item[] = $item_data;
         }
-        $items_sku_title[] = array();
-        $items_sku_partnerId[] = array();
-        $items_amount[] = array();
-        $items_unit[] = array();
-        $items_gross[] = array();
-        $items_total[] = array();
-        $items_discount[] = array();
+        $items_sku_title = array();
+        $items_sku_partnerId = array();
+        $items_amount = array();
+        $items_unit = array();
+        $items_gross = array();
+        $items_total = array();
+        $items_discount = array();
+        
         for ($x = 0; $x < $item_count; $x++) {
             $items_sku_title[$x] = $array_item[$x]['name'];
             $items_sku_partnerId[$x] = wc_get_product($array_item[$x]['product_id'])->get_sku();
-            $items_amount[$x] = $array_item[$x]['total'];
+            $items_amount[$x] = $array_item[$x]['quantity'];
             $items_unit[$x] = $array_item[$x]['quantity'];
             $items_gross[$x] = $array_item[$x]['quantity'];
             $items_total[$x] = $array_item[$x]['total'];
