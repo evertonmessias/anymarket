@@ -9,8 +9,7 @@ if (isset($_GET['nid'])) {
     $tab_status = array(
         'pending' => 'PAID_WAITING_SHIP',
         'cancelled' => 'CANCELED',
-        'completed' => 'CONCLUDED',
-        'completed' => 'INVOICED'
+        'completed' => 'CONCLUDED'
     );
 
     if ($order != null && $nid != null) {

@@ -26,15 +26,6 @@ add_action('wp_head', 'header_scripts');
 // ***************** Add/Delete Pages on Theme
 function add_pages()
 {
-    $page_anymarket = array(
-        'post_title'    => 'anymarket',
-        'post_content'  => '',
-        'post_status'   => 'publish',
-        'post_author'   => 1,
-        'post_type'     => 'page'
-    );
-    wp_insert_post($page_anymarket);
-
     $page_amcallback = array(
         'post_title'    => 'amcallback',
         'post_content'  => '',
@@ -44,11 +35,36 @@ function add_pages()
     );
     wp_insert_post($page_amcallback);
 
+    $page_anymarket = array(
+        'post_title'    => 'anymarket',
+        'post_content'  => '',
+        'post_status'   => 'publish',
+        'post_author'   => 1,
+        'post_type'     => 'page'
+    );
+    wp_insert_post($page_anymarket);
+
+    $page_invoiced = array(
+        'post_title'    => 'invoiced',
+        'post_content'  => '',
+        'post_status'   => 'publish',
+        'post_author'   => 1,
+        'post_type'     => 'page'
+    );
+    wp_insert_post($page_invoiced);
+
 }
 register_activation_hook(__FILE__, 'add_pages');
 
 function remove_pages()
 {
+    $page_amcallback = new WP_Query(array('pagename' => 'amcallback'));
+    while ($page_amcallback->have_posts()) {
+        $page_amcallback->the_post();
+        $id = get_the_ID();
+    }
+    wp_delete_post($id, true);
+
     $page_anymarket = new WP_Query(array('pagename' => 'anymarket'));
     while ($page_anymarket->have_posts()) {
         $page_anymarket->the_post();
@@ -56,9 +72,9 @@ function remove_pages()
     }
     wp_delete_post($id, true);
 
-    $page_amcallback = new WP_Query(array('pagename' => 'amcallback'));
-    while ($page_amcallback->have_posts()) {
-        $page_amcallback->the_post();
+    $page_invoiced = new WP_Query(array('pagename' => 'invoiced'));
+    while ($page_invoiced->have_posts()) {
+        $page_invoiced->the_post();
         $id = get_the_ID();
     }
     wp_delete_post($id, true);
@@ -85,6 +101,15 @@ function anymarkettemplate( $anymarkettemplate )
     return $anymarkettemplate;
 }
 add_filter( 'page_template', 'anymarkettemplate' );
+
+function invoicedtemplate( $invoicedtemplate )
+{
+    if ( is_page( 'invoiced' ) ) {
+        $invoicedtemplate = ABSPATH . '/wp-content/plugins/anymarket/includes/alter-anymarket.php';
+    }
+    return $invoicedtemplate;
+}
+add_filter( 'page_template', 'invoicedtemplate' );
 
 
 // ***************** Add DB anymarket

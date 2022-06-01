@@ -21,7 +21,7 @@ if (!empty($_POST) || !empty($_GET)) {
             'PAID_WAITING_SHIP' => 'pending',
             'CANCELED' => 'cancelled',
             'CONCLUDED' => 'completed',
-            'INVOICED' => 'completed'
+            'INVOICED' => 'invoiced'
         );
 
         $order = wc_get_order($id);
