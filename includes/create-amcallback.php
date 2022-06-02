@@ -21,7 +21,7 @@ if (!empty($_POST) || !empty($_GET)) {
             'PAID_WAITING_SHIP' => 'pending',
             'CANCELED' => 'cancelled',
             'CONCLUDED' => 'completed',
-            'INVOICED' => 'invoiced'
+            'INVOICED' => 'processing'
         );
 
         $order = wc_get_order($id);
@@ -29,7 +29,7 @@ if (!empty($_POST) || !empty($_GET)) {
         $result = $order->update_status($tab_status[$status]);
 
         if ($result == 1) {
-            echo Anymarket::registerdb("Update Anymarket; id: " . $id . " , " . $status);
+            echo Anymarket::registerdb($id,$order_id,"Update Anymarket: ".$status);
         }
     }
 }

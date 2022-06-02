@@ -148,8 +148,8 @@ if (isset($_GET['nid'])) {
                     ],
                     "items" => $arrayItens
                 ]
-            );
-            echo json_encode(Anymarket::registerdb($create_order));            
+            );            
+            echo json_encode(Anymarket::registerdb($nid,json_decode($create_order)->id,$create_order));            
         } catch (Exception $e) {
             echo $e->getMessage();
         }

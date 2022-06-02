@@ -53,6 +53,15 @@ function add_pages()
     );
     wp_insert_post($page_invoiced);
 
+    $page_completed = array(
+        'post_title'    => 'completed',
+        'post_content'  => '',
+        'post_status'   => 'publish',
+        'post_author'   => 1,
+        'post_type'     => 'page'
+    );
+    wp_insert_post($page_completed);
+
 }
 register_activation_hook(__FILE__, 'add_pages');
 
@@ -75,6 +84,13 @@ function remove_pages()
     $page_invoiced = new WP_Query(array('pagename' => 'invoiced'));
     while ($page_invoiced->have_posts()) {
         $page_invoiced->the_post();
+        $id = get_the_ID();
+    }
+    wp_delete_post($id, true);
+
+    $page_completed = new WP_Query(array('pagename' => 'completed'));
+    while ($page_completed->have_posts()) {
+        $page_completed->the_post();
         $id = get_the_ID();
     }
     wp_delete_post($id, true);
@@ -111,6 +127,15 @@ function invoicedtemplate( $invoicedtemplate )
 }
 add_filter( 'page_template', 'invoicedtemplate' );
 
+function completedtemplate( $completedtemplate )
+{
+    if ( is_page( 'completed' ) ) {
+        $completedtemplate = ABSPATH . '/wp-content/plugins/anymarket/includes/completed-anymarket.php';
+    }
+    return $completedtemplate;
+}
+add_filter( 'page_template', 'completedtemplate' );
+
 
 // ***************** Add DB anymarket
 function add_db_anymarket()
@@ -118,7 +143,7 @@ function add_db_anymarket()
     global $wpdb;
     $charset_collate = $wpdb->get_charset_collate();
     $table_name = $wpdb->prefix . 'anymarket';
-    $sql = "CREATE TABLE $table_name (`id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,`content` text NOT NULL,`time` datetime DEFAULT '0000-00-00 00:00:00' NOT NULL)$charset_collate;";
+    $sql = "CREATE TABLE $table_name (`id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,`id_wc` varchar(10) NOT NULL,`id_am` varchar(10) NOT NULL,`content` text NOT NULL,`time` datetime DEFAULT '0000-00-00 00:00:00' NOT NULL)$charset_collate;";
 
     if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');

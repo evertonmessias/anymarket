@@ -13,9 +13,9 @@ try {
 //echo json_encode($respostas);
 
 echo "<table>";
-echo "<tr><th>Respostas</th><th>Data</th></tr>";
+echo "<tr><th>ID WC</th><th>ID AM</th><th>Respostas</th><th>Data</th></tr>";
 foreach($respostas as $item){
-    echo "<tr><td>".$item->content."</td><td>".$item->time."</td></tr>";
+    echo "<tr><td>".$item->id_wc."</td><td>".$item->id_am."</td><td>".$item->content."</td><td>".$item->time."</td></tr>";
 }
 echo "</table>";
 
