@@ -7,6 +7,8 @@ if (isset($_GET['nid'])) {
 
     sleep(5);
 
+    $data = gmdate("Y\-m\-d\TH:i:s");
+
     $order = wc_get_order($wcid);    
 
     try {
@@ -26,7 +28,7 @@ if (isset($_GET['nid'])) {
     if ($order != null && $wcid != null && $amid != "") {
         
         try {
-            $create_order = Anymarket::alter(["status" => "CONCLUDED"],$amid);
+            $create_order = Anymarket::alter(["status" => "CONCLUDED", "tracking" => ["deliveredDate" => "$data"]],$amid);
             echo json_encode(Anymarket::registerdb($wcid,$amid,$create_order));                   
         } catch (Exception $e) {
             echo $e->getMessage();

@@ -121,7 +121,7 @@ add_filter( 'page_template', 'anymarkettemplate' );
 function invoicedtemplate( $invoicedtemplate )
 {
     if ( is_page( 'invoiced' ) ) {
-        $invoicedtemplate = ABSPATH . '/wp-content/plugins/anymarket/includes/alter-anymarket.php';
+        $invoicedtemplate = ABSPATH . '/wp-content/plugins/anymarket/includes/invoiced-anymarket.php';
     }
     return $invoicedtemplate;
 }

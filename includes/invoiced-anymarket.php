@@ -6,6 +6,7 @@ if (isset($_GET['nid'])) {
     $wcid = $_GET['nid'];
     $order = wc_get_order($wcid);
 
+    $data = gmdate("Y\-m\-d\TH:i:s");
     
 
     try {
@@ -25,7 +26,7 @@ if (isset($_GET['nid'])) {
     if ($order != null && $wcid != null && $amid != "") {
         
         try {
-            $create_order = Anymarket::alter(["status" => "INVOICED"],$amid);
+            $create_order = Anymarket::alter(["status" => "INVOICED", "invoice" => ["date" => "$data"]],$amid);
             echo json_encode(Anymarket::registerdb($wcid,$amid,$create_order));                   
         } catch (Exception $e) {
             echo $e->getMessage();

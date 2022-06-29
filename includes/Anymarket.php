@@ -1,7 +1,7 @@
 <?php
 class Anymarket
 {
-    public static function create(array $params) // create woocommeerce in anymarket
+    public static function create(array $params) // create in anymarket
     {
         $config_url = get_option('anymarket_input_0') . "/orders";
         $config_token = get_option('anymarket_input_1');
@@ -27,7 +27,7 @@ class Anymarket
         return $response;
     }
 
-    public static function alter(array $params, $id) // alter in anymarket
+    public static function alter(array $params, $id) // completed & invoiced
     {
         $config_url = get_option('anymarket_input_0') . "/orders" . "/" . $id;
         $config_token = get_option('anymarket_input_1');
@@ -53,7 +53,7 @@ class Anymarket
         return $response;
     }
 
-    public static function products() // list product from anymarket
+    public static function products() // list product from anymarket in wp
     {
         $config_url = get_option('anymarket_input_0') . "/products";
         $config_token = get_option('anymarket_input_1');
