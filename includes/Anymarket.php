@@ -122,4 +122,9 @@ class Anymarket
         );
         return $results;
     }
+
+    public static function data(){
+        // format: 2022-07-06T20:31:29Z
+        return gmdate("Y\-m\-d\TH:i:s\Z");
+    }
 }

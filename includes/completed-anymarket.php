@@ -7,7 +7,7 @@ if (isset($_GET['nid'])) {
 
     sleep(5);
 
-    $data = gmdate("Y\-m\-d\TH:i:s");
+    $data = Anymarket::data();
 
     $order = wc_get_order($wcid);    
 

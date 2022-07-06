@@ -6,8 +6,7 @@ if (isset($_GET['nid'])) {
     $wcid = $_GET['nid'];
     $order = wc_get_order($wcid);
 
-    $data = gmdate("Y\-m\-d\TH:i:s");
-    
+    $data = Anymarket::data();    
 
     try {
         $respostas = Anymarket::response();    
