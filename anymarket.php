@@ -61,7 +61,6 @@ function add_pages()
         'post_type'     => 'page'
     );
     wp_insert_post($page_completed);
-
 }
 register_activation_hook(__FILE__, 'add_pages');
 
@@ -94,47 +93,46 @@ function remove_pages()
         $id = get_the_ID();
     }
     wp_delete_post($id, true);
-
 }
 register_deactivation_hook(__FILE__, 'remove_pages');
 
 
 // ***************** Alter Template
-function amcallbacktemplate( $amcallbacktemplate )
+function amcallbacktemplate($amcallbacktemplate)
 {
-    if ( is_page( 'amcallback' ) ) {
+    if (is_page('amcallback')) {
         $amcallbacktemplate = ABSPATH . '/wp-content/plugins/anymarket/includes/create-amcallback.php';
     }
     return $amcallbacktemplate;
 }
-add_filter( 'page_template', 'amcallbacktemplate' );
+add_filter('page_template', 'amcallbacktemplate');
 
-function anymarkettemplate( $anymarkettemplate )
+function anymarkettemplate($anymarkettemplate)
 {
-    if ( is_page( 'anymarket' ) ) {
+    if (is_page('anymarket')) {
         $anymarkettemplate = ABSPATH . '/wp-content/plugins/anymarket/includes/create-anymarket.php';
     }
     return $anymarkettemplate;
 }
-add_filter( 'page_template', 'anymarkettemplate' );
+add_filter('page_template', 'anymarkettemplate');
 
-function invoicedtemplate( $invoicedtemplate )
+function invoicedtemplate($invoicedtemplate)
 {
-    if ( is_page( 'invoiced' ) ) {
+    if (is_page('invoiced')) {
         $invoicedtemplate = ABSPATH . '/wp-content/plugins/anymarket/includes/invoiced-anymarket.php';
     }
     return $invoicedtemplate;
 }
-add_filter( 'page_template', 'invoicedtemplate' );
+add_filter('page_template', 'invoicedtemplate');
 
-function completedtemplate( $completedtemplate )
+function completedtemplate($completedtemplate)
 {
-    if ( is_page( 'completed' ) ) {
+    if (is_page('completed')) {
         $completedtemplate = ABSPATH . '/wp-content/plugins/anymarket/includes/completed-anymarket.php';
     }
     return $completedtemplate;
 }
-add_filter( 'page_template', 'completedtemplate' );
+add_filter('page_template', 'completedtemplate');
 
 
 // ***************** Add DB anymarket
@@ -154,21 +152,21 @@ register_activation_hook(__FILE__, 'add_db_anymarket');
 
 
 // ***************** Add style & script for Admin
-function style_and_script()
+function style_and_script($hook)
 {
-?>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/css/bootstrap-select.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css'>
-<?php
-    wp_enqueue_style('stilos', '/wp-content/plugins/anymarket/includes/assets/anymarket.css');
-    wp_enqueue_script('scripts', '/wp-content/plugins/anymarket/includes/assets/anymarket.js');
+    //Load only on ?page=anymarket,settings,products,response
+    if ($hook == "toplevel_page_anymarket" || is_page_template("/wp-admin/admin.php?page=settings") || $hook == "toplevel_page_products" || $hook == "toplevel_page_response") {
+        wp_enqueue_style("style1", "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/css/bootstrap-select.css");
+        wp_enqueue_style("style2", "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css");
+        wp_enqueue_style("style3", "https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css");
+        wp_enqueue_style("style4", "/wp-content/plugins/anymarket/includes/assets/anymarket.css");
+        wp_enqueue_script("script1", "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js");
+        wp_enqueue_script("script2", "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js");
+        wp_enqueue_script("script3", "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js");
+        wp_enqueue_script("script4", "/wp-content/plugins/anymarket/includes/assets/anymarket.js");
+    }
 }
-add_action('admin_enqueue_scripts', 'style_and_script');
+add_action("admin_enqueue_scripts", "style_and_script");
 
 
 // ***************** Page About
